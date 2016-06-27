@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+
+$GOPATH/bin/go-server&
+sleep 2
+
+wrk "http://localhost:5000" \
+-d 3 \
+-c 50 \
+-t 8
+
+kill $!
